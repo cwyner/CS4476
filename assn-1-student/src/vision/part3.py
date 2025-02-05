@@ -41,5 +41,3 @@ def my_conv2d_pytorch(image: torch.Tensor, kernel: torch.Tensor) -> torch.Tensor
 
     ### END OF STUDENT CODE ####
     ############################
-
-    return filtered_image
