@@ -159,4 +159,33 @@ def create_hybrid_image(
       low frequency content. Think about how to do this in mathematical terms.
     - Don't forget to make sure the pixel values of the hybrid image are
       between 0 and 1. This is known as 'clipping'.
-    - If you want to use images with different d
+    - If you want to use images with different dimensions, you should resize
+      them in the notebook code.
+    """
+
+    assert image1.shape[0] == image2.shape[0]
+    assert image1.shape[1] == image2.shape[1]
+    assert image1.shape[2] == image2.shape[2]
+    assert filter.shape[0] <= image1.shape[0]
+    assert filter.shape[1] <= image1.shape[1]
+    assert filter.shape[0] % 2 == 1
+    assert filter.shape[1] % 2 == 1
+
+    ############################
+    ### TODO: YOUR CODE HERE ###
+
+    # Applies filter to get low frequency of image 1
+    low_frequencies = my_conv2d_numpy(image1, filter)
+    
+    # Applies filter to get low frequency of image 2, then subtracts it from orig image to get its high frequency
+    low_freq_img2 = my_conv2d_numpy(image2, filter)
+    high_frequencies = image2 - low_freq_img2
+    
+    # Calculates the hybrid image
+    hybrid_image = low_frequencies + high_frequencies
+    hybrid_image = np.clip(hybrid_image, 0, 1)
+
+    ### END OF STUDENT CODE ####
+    ############################
+
+    return low_frequencies, high_frequencies, hybrid_image
