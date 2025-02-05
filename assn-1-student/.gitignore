@@ -197,6 +197,5 @@ ENV/
 .DS_Store
 
 .mypy_cache/
-results
 
 tests/__pycache__/*
